@@ -24,16 +24,16 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Attack",
+                    "name": "CUADRADO",
                     "type": "Button",
                     "id": "6c2ab1b8-8984-453a-af3d-a3c78ae1679a",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interact",
+                    "name": "TRIANGULO",
                     "type": "Button",
                     "id": "852140f2-7766-474d-8707-702459ba45f3",
                     "expectedControlType": "",
@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Crouch",
+                    "name": "CIRCULO",
                     "type": "Button",
                     "id": "27c5f898-bc57-4ee1-8800-db469aca5fe3",
                     "expectedControlType": "",
@@ -51,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Jump",
+                    "name": "EQUIS",
                     "type": "Button",
                     "id": "f1ba0d36-48eb-4cd5-b651-1c94a6531f70",
                     "expectedControlType": "",
@@ -60,7 +60,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Sprint",
+                    "name": "L3",
                     "type": "Button",
                     "id": "641cd816-40e6-41b4-8c3d-04687c349290",
                     "expectedControlType": "",
@@ -297,7 +297,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "Attack",
+                    "action": "CUADRADO",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -308,7 +308,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Attack",
+                    "action": "CUADRADO",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -319,7 +319,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Touch",
-                    "action": "Attack",
+                    "action": "CUADRADO",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -330,7 +330,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Joystick",
-                    "action": "Attack",
+                    "action": "CUADRADO",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -341,7 +341,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "XR",
-                    "action": "Attack",
+                    "action": "CUADRADO",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -352,7 +352,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Attack",
+                    "action": "CUADRADO",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -363,7 +363,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Sprint",
+                    "action": "L3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -374,7 +374,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Sprint",
+                    "action": "L3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -385,7 +385,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "XR",
-                    "action": "Sprint",
+                    "action": "L3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -396,7 +396,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Jump",
+                    "action": "EQUIS",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -407,7 +407,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Jump",
+                    "action": "EQUIS",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -418,7 +418,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "XR",
-                    "action": "Jump",
+                    "action": "EQUIS",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -429,7 +429,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Interact",
+                    "action": "TRIANGULO",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -440,7 +440,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Interact",
+                    "action": "TRIANGULO",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -451,7 +451,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Crouch",
+                    "action": "CIRCULO",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -462,7 +462,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Crouch",
+                    "action": "CIRCULO",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
