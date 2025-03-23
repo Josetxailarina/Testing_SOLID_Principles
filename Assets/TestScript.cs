@@ -6,6 +6,7 @@ public class TestScript : MonoBehaviour
     {
         print("V1");
         print("V2");
+        print("V3");
 
     }
 }
