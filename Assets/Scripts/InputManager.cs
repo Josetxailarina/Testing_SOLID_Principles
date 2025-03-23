@@ -13,14 +13,16 @@ public class InputManager : MonoBehaviour
         if (context.performed)
         {
             moveDirection = context.ReadValue<Vector2>().x;
-            OnMovePressed?.Invoke(moveDirection);
-            Debug.Log("Moviendo a " + moveDirection);
+            if (moveDirection != 0)
+            {
+                OnMovePressed?.Invoke(moveDirection);
+            }
+            
         }
         else if (context.canceled)
         {
             moveDirection = 0;
             OnMovePressed?.Invoke(moveDirection);
-            Debug.Log("Parado");
         }
     }
 }
