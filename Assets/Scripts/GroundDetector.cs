@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FeetCollider : MonoBehaviour
+public class GroundDetector : MonoBehaviour
 {
     private int groundLayer = 0;
     [SerializeField] private MoveController moveController;

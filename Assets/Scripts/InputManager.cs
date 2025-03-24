@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviour
     public static event Action OnJumpCanceled;
     public static event Action OnInteractPressed;
 
-    // Maneja la entrada de movimiento
+    // CALLED BY THE INPUT SYSTEM   
     public void HandleMoveInput(InputAction.CallbackContext context)
     {
         if (context.performed)
