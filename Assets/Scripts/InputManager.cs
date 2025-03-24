@@ -43,7 +43,6 @@ public class InputManager : MonoBehaviour
     {
         if (context.performed)
         {
-            print("Interact pressed");
             OnInteractPressed?.Invoke();
         }
     }

@@ -29,7 +29,6 @@ public class PlayerInteract : MonoBehaviour
     {
         if (collision.gameObject.layer == interactableLayer)
         {
-            print("Interactable detectado");
             currentInteractable = collision.GetComponent<IInteractable>();
         }
     }

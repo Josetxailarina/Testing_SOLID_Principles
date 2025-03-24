@@ -12,6 +12,9 @@ public class MoveController : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private Animator anim;
+    [SerializeField] private GameObject spriteObject;
+    private bool lookingRight = true;
 
 
     private void Start()
@@ -36,6 +39,17 @@ public class MoveController : MonoBehaviour
     private void GetDirection(float direction)
     {
         moveDirection = direction;
+        anim.SetFloat("Velocity", Mathf.Abs(moveDirection));
+        if (moveDirection > 0 && !lookingRight)
+        {
+            spriteObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            lookingRight = true;
+        }
+        else if (moveDirection < 0 && lookingRight)
+        {
+            spriteObject.transform.localScale = new Vector3(-0.5f, 0.5f, 0.5f);
+            lookingRight = false;
+        }
     }
     private void TryToJump()
     {
