@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MoveController : MonoBehaviour
@@ -17,6 +18,7 @@ public class MoveController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
+    
     private void OnEnable()
     {
         InputManager.OnMovePressed += GetDirection;

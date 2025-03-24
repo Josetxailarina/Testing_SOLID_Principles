@@ -8,6 +8,7 @@ public class InputManager : MonoBehaviour
     public static event Action<float> OnMovePressed;
     public static event Action OnJumpPressed;
     public static event Action OnJumpCanceled;
+    public static event Action OnInteractPressed;
 
     // Maneja la entrada de movimiento
     public void HandleMoveInput(InputAction.CallbackContext context)
@@ -36,6 +37,14 @@ public class InputManager : MonoBehaviour
         else if (context.canceled)
         {
            OnJumpCanceled?.Invoke();
+        }
+    }
+    public void Interact(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            print("Interact pressed");
+            OnInteractPressed?.Invoke();
         }
     }
 }
