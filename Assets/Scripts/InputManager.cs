@@ -17,7 +17,6 @@ public class InputManager : MonoBehaviour
     {
         if (context.performed)
         {
-            print("pulsado cuadrado");
             OnAttackPressed?.Invoke();
         }
     }
@@ -30,7 +29,6 @@ public class InputManager : MonoBehaviour
             {
                 OnMovePressed?.Invoke(moveDirection);
             }
-            
         }
         else if (context.canceled)
         {

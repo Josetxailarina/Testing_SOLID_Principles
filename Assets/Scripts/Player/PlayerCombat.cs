@@ -4,11 +4,7 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] private Animator playerAnim;
-    private bool canAttack = true;
 
-
-
-    
     private void OnEnable()
     {
         InputManager.OnAttackPressed += TryToAttack;
@@ -21,15 +17,8 @@ public class PlayerCombat : MonoBehaviour
 
     private void TryToAttack()
     {
-        print("Intento de ataque"); 
-        if (!canAttack) return;
-        StartCoroutine(AttackCooldown());
-    }
-    IEnumerator AttackCooldown()
-    {
+        //The animator controlls the collider state and the combo
         playerAnim.SetTrigger("Attack");
-        canAttack = false;
-        yield return new WaitForSeconds(0f);
-        canAttack = true;
     }
+  
 }
