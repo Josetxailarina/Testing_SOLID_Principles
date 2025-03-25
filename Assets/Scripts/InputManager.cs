@@ -9,8 +9,18 @@ public class InputManager : MonoBehaviour
     public static event Action OnJumpPressed;
     public static event Action OnJumpCanceled;
     public static event Action OnInteractPressed;
+    public static event Action OnAttackPressed;
 
-    // Maneja la entrada de movimiento
+    // CALLED BY THE INPUT SYSTEM   
+
+    public void Attack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            print("pulsado cuadrado");
+            OnAttackPressed?.Invoke();
+        }
+    }
     public void HandleMoveInput(InputAction.CallbackContext context)
     {
         if (context.performed)

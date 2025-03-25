@@ -88,6 +88,7 @@ public class MoveController : MonoBehaviour
     {
         onGround = true;
         jumping = false;
+        anim.SetBool("InAir", false);
         coyoteTime = 0.1f;
         if (jumpBufferTimer > 0)
         {
@@ -98,11 +99,13 @@ public class MoveController : MonoBehaviour
     {
         onGround = false;
         coyoteTime = 0.1f;
+        anim.SetBool("InAir", true);
+
 
     }
 
-    
-    
+
+
 
     private void Update()
     {
