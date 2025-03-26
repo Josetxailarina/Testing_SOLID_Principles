@@ -1,15 +1,17 @@
 using System.Collections;
 using UnityEngine;
 
-public class WalkingEnemy : Enemy
+public class EnemyPatrol : MonoBehaviour
 {
-    private bool movingRight = false;
+    [SerializeField] private bool movingRight;
     [SerializeField] private float moveVelocity = 10f;
+    [SerializeField] private float timeToChangeDirection = 2f;
     private Rigidbody2D rb;
+    private BasicEnemy basicEnemy;
 
-    public override void Start()
+    private void Start()
     {
-        base.Start();
+        basicEnemy = GetComponent<BasicEnemy>();
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(ChangeDirection());
     }
@@ -20,7 +22,7 @@ public class WalkingEnemy : Enemy
     
     private void Move()
     {
-        if (!isDead)
+        if (!basicEnemy.isDead)
         {
             if (movingRight)
             {
@@ -35,7 +37,7 @@ public class WalkingEnemy : Enemy
 
     IEnumerator ChangeDirection()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(timeToChangeDirection);
         movingRight = !movingRight;
         StartCoroutine(ChangeDirection());
     }

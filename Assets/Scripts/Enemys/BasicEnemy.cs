@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class BasicEnemy : MonoBehaviour
 
 {                  
     [SerializeField] protected float health = 100f; //protected = accessed by the child class
@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     
     protected SpriteRenderer spriteRenderer;
     protected Color actualColor;
-    protected bool isDead = false;
+    [HideInInspector] public bool isDead = false;
 
 
 

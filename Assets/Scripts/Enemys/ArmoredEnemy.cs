@@ -1,7 +1,7 @@
 using Unity.Mathematics;
 using UnityEngine;
 
-public class ArmoredEnemy : Enemy
+public class ArmoredEnemy : BasicEnemy
 {
     private float armor = 100f;
     [SerializeField] private Color armorColor;
