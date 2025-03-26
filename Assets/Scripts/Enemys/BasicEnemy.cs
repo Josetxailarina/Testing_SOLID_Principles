@@ -7,18 +7,16 @@ public class BasicEnemy : MonoBehaviour
     [SerializeField] protected float health = 100f; //protected = accessed by the child class
     [SerializeField] private float damage = 10f;
     [SerializeField] private Collider2D hitboxCollider;
+    [SerializeField] private GameObject spritesParent;
 
-    
-    protected SpriteRenderer spriteRenderer;
-    protected Color actualColor;
+    protected SpriteRenderer[] spriteRenderers;
     [HideInInspector] public bool isDead = false;
 
 
 
     public virtual void Start() //virtual = can be overriden by the child class
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        actualColor = spriteRenderer.color;
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
     }
     public virtual void TakeDamage(float amount)
     {
@@ -27,22 +25,29 @@ public class BasicEnemy : MonoBehaviour
         {
             isDead = true;
             StopAllCoroutines();
-            spriteRenderer.enabled = false;
-            hitboxCollider.enabled = false;
+            spritesParent.SetActive(false);
         }
         else
         {
             StartCoroutine(FlashRed());
         }
     }
-    
+
     protected IEnumerator FlashRed()
     {
-        spriteRenderer.color = Color.white;
+        SetTintColor(new Color(1, 1, 1, 1)); // White with alpha 1
         hitboxCollider.enabled = false;
         yield return new WaitForSeconds(0.1f);
         hitboxCollider.enabled = true;
-        spriteRenderer.color = actualColor;
+        SetTintColor(new Color(1, 1, 1, 0)); // White with alpha 0
     }
-    
+
+    private void SetTintColor(Color color)
+    {
+        foreach (var spriteRenderer in spriteRenderers)
+        {
+            spriteRenderer.material.SetColor("_Tint", color);
+        }
+    }
+
 }

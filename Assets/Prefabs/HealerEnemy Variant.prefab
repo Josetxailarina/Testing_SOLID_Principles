@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6428122777357493730
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2808359714656044168, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
+      propertyPath: m_Name
+      value: HealerEnemy Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373918566634749423, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373918566634749423, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373918566634749423, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373918566634749423, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373918566634749423, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373918566634749423, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373918566634749423, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373918566634749423, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373918566634749423, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373918566634749423, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6034912021836605162, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
+      propertyPath: enemyScript
+      value: 
+      objectReference: {fileID: 1601160866172761661}
+    m_RemovedComponents:
+    - {fileID: 4920208753677609166, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2808359714656044168, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1601160866172761661}
+  m_SourcePrefab: {fileID: 100100000, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
+--- !u!61 &1772688242398133536 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 4732329982340847810, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
+  m_PrefabInstance: {fileID: 6428122777357493730}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5986376297046284949 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 731454636631703415, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
+  m_PrefabInstance: {fileID: 6428122777357493730}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9208748378751164778 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2808359714656044168, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
+  m_PrefabInstance: {fileID: 6428122777357493730}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1601160866172761661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9208748378751164778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc135b476475eaf459ce319f0b94d6d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  damage: 10
+  hitboxCollider: {fileID: 1772688242398133536}
+  spritesParent: {fileID: 5986376297046284949}
+  isDead: 0
+  healAmount: 10
