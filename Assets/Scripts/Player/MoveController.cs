@@ -5,16 +5,24 @@ public class MoveController : MonoBehaviour
 {
     private float moveDirection = 0;
     private float jumpBufferTimer = 0;
-    private float coyoteTime = 0;
+    private float jumpBufferDuration = 0.15f;
+    private float coyoteTimer = 0;
+    private float coyoteDuration = 0.1f;
+    private Rigidbody2D rb;
+
+    private bool lookingRight = true;
+    private bool jumpPressed = false;
+    
+    [HideInInspector] public bool canMove = true;
     [HideInInspector] public bool jumping = false;
     [HideInInspector] public bool onGround = false;
-    private bool jumpPressed = false;
-    private Rigidbody2D rb;
+    
+    
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private Animator anim;
     [SerializeField] private GameObject spriteObject;
-    private bool lookingRight = true;
+    
 
 
     private void Start()
@@ -38,8 +46,26 @@ public class MoveController : MonoBehaviour
 
     private void GetDirection(float direction)
     {
-        moveDirection = direction;
-        anim.SetFloat("Velocity", Mathf.Abs(moveDirection));
+        if (canMove)
+        {
+            moveDirection = direction;
+            anim.SetFloat("Velocity", Mathf.Abs(moveDirection));
+            UpdateSpriteDirection();
+        }
+    }
+
+    public void StopMovement()
+    {
+        canMove = false;
+        moveDirection = 0;
+        anim.SetFloat("Velocity", 0);
+    }
+    public void EnableMovement()
+    {
+        canMove = true;
+    }
+    private void UpdateSpriteDirection()
+    {
         if (moveDirection > 0 && !lookingRight)
         {
             spriteObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
@@ -51,24 +77,26 @@ public class MoveController : MonoBehaviour
             lookingRight = false;
         }
     }
+
     private void TryToJump()
     {
         jumpPressed = true;
-        if (coyoteTime > 0 && !jumping)
+        if (coyoteTimer > 0 && !jumping) 
         {
             PerformJump();
         }
-        else if (coyoteTime <= 0)
+        else if (coyoteTimer <= 0)
         {
-            jumpBufferTimer = 0.15f;
+            jumpBufferTimer = jumpBufferDuration;
         }
     }
     private void JumpCanceled()
     {
+        // Reduce the jump height if the jump button is released
         jumpPressed = false;
         if (jumping && rb.linearVelocity.y > 0)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f); // Reducir la altura del salto si el botón se suelta temprano
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f); 
         }
     }
     private void PerformJump()
@@ -80,6 +108,7 @@ public class MoveController : MonoBehaviour
         }
         else
         {
+            // Reduce the jump height if the jump button is not pressed
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce * 0.5f);
 
         }
@@ -89,7 +118,7 @@ public class MoveController : MonoBehaviour
         onGround = true;
         jumping = false;
         anim.SetBool("InAir", false);
-        coyoteTime = 0.1f;
+        coyoteTimer = coyoteDuration;
         if (jumpBufferTimer > 0)
         {
             PerformJump();
@@ -98,10 +127,8 @@ public class MoveController : MonoBehaviour
     public void LeaveGround()
     {
         onGround = false;
-        coyoteTime = 0.1f;
+        coyoteTimer = coyoteDuration;
         anim.SetBool("InAir", true);
-
-
     }
 
 
@@ -109,22 +136,35 @@ public class MoveController : MonoBehaviour
 
     private void Update()
     {
-        rb.linearVelocity = new Vector2(moveDirection * speed , rb.linearVelocity.y);
-        if (!onGround && jumpBufferTimer > 0)
-        {
-            jumpBufferTimer -= Time.deltaTime;
-        }
-        if (!onGround && coyoteTime > 0)
-        {
-            coyoteTime -= Time.deltaTime;
-        }
+        rb.linearVelocity = new Vector2(moveDirection * speed, rb.linearVelocity.y);
+        UpdateJumpBufferTimer();
+        UpdateCoyoteTimer();
     }
     private void FixedUpdate()
     {
-        if (rb.linearVelocity.y < 2 && coyoteTime <= 0)
+        // Make the player fall faster
+        if (rb.linearVelocity.y < 2 && coyoteTimer <= 0)
         {
             rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (1.5f) * Time.deltaTime; // Aumentar la gravedad para caídas más rápidas
         }
     }
+
+    private void UpdateCoyoteTimer()
+    {
+        if (!onGround && coyoteTimer > 0)
+        {
+            coyoteTimer -= Time.deltaTime;
+        }
+    }
+
+    private void UpdateJumpBufferTimer()
+    {
+        if (!onGround && jumpBufferTimer > 0)
+        {
+            jumpBufferTimer -= Time.deltaTime;
+        }
+    }
+
+    
 
 }

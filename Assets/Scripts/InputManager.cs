@@ -10,6 +10,9 @@ public class InputManager : MonoBehaviour
     public static event Action OnJumpCanceled;
     public static event Action OnInteractPressed;
     public static event Action OnAttackPressed;
+    public static event Action OnDodgePressed;
+    public static event Action OnBlockPressed;
+    public static event Action OnBlockCanceled;
 
     // CALLED BY THE INPUT SYSTEM   
 
@@ -17,7 +20,6 @@ public class InputManager : MonoBehaviour
     {
         if (context.performed)
         {
-            print("pulsado cuadrado");
             OnAttackPressed?.Invoke();
         }
     }
@@ -30,7 +32,6 @@ public class InputManager : MonoBehaviour
             {
                 OnMovePressed?.Invoke(moveDirection);
             }
-            
         }
         else if (context.canceled)
         {
@@ -54,6 +55,25 @@ public class InputManager : MonoBehaviour
         if (context.performed)
         {
             OnInteractPressed?.Invoke();
+        }
+    }
+
+    public void Dodge(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+           OnDodgePressed?.Invoke();
+        }
+    }
+    public void Block(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+           OnBlockPressed?.Invoke();
+        }
+        else if (context.canceled)
+        {
+            OnBlockCanceled?.Invoke();
         }
     }
 }
