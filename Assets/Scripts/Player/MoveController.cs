@@ -12,7 +12,8 @@ public class MoveController : MonoBehaviour
 
     private bool lookingRight = true;
     private bool jumpPressed = false;
-
+    
+    [HideInInspector] public bool canMove = true;
     [HideInInspector] public bool jumping = false;
     [HideInInspector] public bool onGround = false;
     
@@ -45,11 +46,24 @@ public class MoveController : MonoBehaviour
 
     private void GetDirection(float direction)
     {
-        moveDirection = direction;
-        anim.SetFloat("Velocity", Mathf.Abs(moveDirection));
-        UpdateSpriteDirection();
+        if (canMove)
+        {
+            moveDirection = direction;
+            anim.SetFloat("Velocity", Mathf.Abs(moveDirection));
+            UpdateSpriteDirection();
+        }
     }
 
+    public void StopMovement()
+    {
+        canMove = false;
+        moveDirection = 0;
+        anim.SetFloat("Velocity", 0);
+    }
+    public void EnableMovement()
+    {
+        canMove = true;
+    }
     private void UpdateSpriteDirection()
     {
         if (moveDirection > 0 && !lookingRight)

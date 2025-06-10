@@ -592,6 +592,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: c0abfe71e7197fa45892b9a76a8c38e8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 271462011}
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: c0abfe71e7197fa45892b9a76a8c38e8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 271462012}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: c0abfe71e7197fa45892b9a76a8c38e8, type: 3}
 --- !u!4 &271462009 stripped
 Transform:
@@ -625,6 +628,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &271462012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271462010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6880741d7b7ffd0488aa5d4cf4bb5f64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCombat: {fileID: 1852976276}
 --- !u!1 &291245681
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,19 +938,7 @@ MonoBehaviour:
     m_ActionId: 6b444451-8a00-4d00-a97e-f47457f736a8
     m_ActionName: 'Player/Look[/DualShock4GamepadHID/rightStick,/XInputControllerWindows/rightStick,/Mouse/delta,/Pen/delta]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 416189039}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: Attack
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 6c2ab1b8-8984-453a-af3d-a3c78ae1679a
     m_ActionName: 'Player/Attack[/DualShock4GamepadHID/buttonWest,/XInputControllerWindows/buttonWest,/Mouse/leftButton,/Keyboard/enter]'
   - m_PersistentCalls:
@@ -954,7 +958,19 @@ MonoBehaviour:
     m_ActionId: 852140f2-7766-474d-8707-702459ba45f3
     m_ActionName: 'Player/Interact[/Keyboard/e,/DualShock4GamepadHID/buttonNorth,/XInputControllerWindows/buttonNorth]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 416189039}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: Dodge
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 27c5f898-bc57-4ee1-8800-db469aca5fe3
     m_ActionName: 'Player/Crouch[/DualShock4GamepadHID/buttonEast,/XInputControllerWindows/buttonEast,/Keyboard/c]'
   - m_PersistentCalls:
@@ -1017,6 +1033,38 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 416189039}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: Attack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: cebe5ada-b8f6-4ba9-8bbc-e6dee374678f
+    m_ActionName: Player/R1
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 416189039}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: Block
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8719b7dc-0568-4066-aaea-849dd05a521c
+    m_ActionName: 'Player/L1[/DualShock4GamepadHID/rightShoulder]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1460,7 +1508,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 0}
+  m_BackGroundColor: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2059,6 +2107,10 @@ PrefabInstance:
     - target: {fileID: 2808359714656044168, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
       propertyPath: m_Name
       value: BasicEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2808359714656044168, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4373918566634749423, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3119,6 +3171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e73fc8a26c58fd4581ff34cb285a0cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canMove: 1
   jumping: 0
   onGround: 0
   speed: 6
@@ -3165,7 +3218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1860075695
 Transform:
   m_ObjectHideFlags: 0
@@ -3355,6 +3408,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealerEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 9208748378751164778, guid: 5c207c4d1fdfeaa429f82da8778dc13d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3371,6 +3428,10 @@ PrefabInstance:
     - target: {fileID: 2371195154117827157, guid: 689df47e2672e664d854578ee2d6af4e, type: 3}
       propertyPath: m_Name
       value: ArmoredEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2371195154117827157, guid: 689df47e2672e664d854578ee2d6af4e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4224982183258530610, guid: 689df47e2672e664d854578ee2d6af4e, type: 3}
       propertyPath: m_LocalPosition.x
