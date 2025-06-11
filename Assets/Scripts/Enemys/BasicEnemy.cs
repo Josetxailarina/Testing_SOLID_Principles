@@ -5,7 +5,7 @@ public class BasicEnemy : MonoBehaviour
 
 {                  
     [SerializeField] protected float health = 100f; //protected = accessed by the child class
-    [SerializeField] private float damage = 10f;
+    public float damage = 10f;
     [SerializeField] private Collider2D hitboxCollider;
     [SerializeField] private GameObject spritesParent;
 

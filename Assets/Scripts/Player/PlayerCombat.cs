@@ -8,6 +8,7 @@ public class PlayerCombat : MonoBehaviour
     private bool isAttacking = false;
     private bool canCancelAttack = false;
     private bool isBlockingPressed = false;
+    private bool attackBufferActive = false;
 
     private void OnEnable()
     {
@@ -39,13 +40,17 @@ public class PlayerCombat : MonoBehaviour
             canCancelAttack = true;
             playerAnim.SetTrigger("Attack"); 
         }
+        else
+        {
+            attackBufferActive = true;
+        }
     }
 
-    public void DisableAttackCancellation()
+    public void DisableAttackCancellation() //called by the animation event when cancelAttack windows are closed
     {
         canCancelAttack = false;
     }
-    public void StopAttack()
+    public void StopAttack() //called by the animation event when the attack animation ends
     {
         isAttacking = false;
         canCancelAttack = false;
@@ -54,7 +59,11 @@ public class PlayerCombat : MonoBehaviour
         {
             TryToBlock();
         }
-        
+        if (attackBufferActive)
+        {
+            attackBufferActive = false;
+            TryToAttack();
+        }
     }
 
     private void TryToDodge()
@@ -66,6 +75,7 @@ public class PlayerCombat : MonoBehaviour
         isBlockingPressed = true;
         if (!isAttacking || canCancelAttack)
         {
+            attackBufferActive = false;
             isAttacking = false;
             canCancelAttack = false;
             playerAnim.SetTrigger("GoBlock");

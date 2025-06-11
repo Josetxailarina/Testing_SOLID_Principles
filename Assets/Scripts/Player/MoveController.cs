@@ -46,19 +46,14 @@ public class MoveController : MonoBehaviour
 
     private void GetDirection(float direction)
     {
-        if (canMove)
-        {
-            moveDirection = direction;
-            anim.SetFloat("Velocity", Mathf.Abs(moveDirection));
-            UpdateSpriteDirection();
-        }
+        moveDirection = direction;
+        anim.SetFloat("Velocity", Mathf.Abs(moveDirection));
+        UpdateSpriteDirection();
     }
 
     public void StopMovement()
     {
         canMove = false;
-        moveDirection = 0;
-        anim.SetFloat("Velocity", 0);
     }
     public void EnableMovement()
     {
@@ -136,12 +131,14 @@ public class MoveController : MonoBehaviour
 
     private void Update()
     {
-        rb.linearVelocity = new Vector2(moveDirection * speed, rb.linearVelocity.y);
         UpdateJumpBufferTimer();
         UpdateCoyoteTimer();
     }
     private void FixedUpdate()
     {
+        
+        rb.linearVelocity = new Vector2(moveDirection * speed, rb.linearVelocity.y);
+
         // Make the player fall faster
         if (rb.linearVelocity.y < 2 && coyoteTimer <= 0)
         {
