@@ -3,12 +3,20 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] private Animator playerAnim;
-    
+
     private MoveController moveController;
+
     private bool isAttacking = false;
+    public bool isBlocking = false;
+    public bool isParrying = false;
+
     private bool canCancelAttack = false;
     private bool isBlockingPressed = false;
     private bool attackBufferActive = false;
+
+    // Parry variables
+    [SerializeField] private float parryWindowDuration = 0.3f;
+    private float parryWindowTimer = 0f;
 
     private void OnEnable()
     {
@@ -31,6 +39,19 @@ public class PlayerCombat : MonoBehaviour
         moveController = GetComponent<MoveController>();
     }
 
+    private void Update()
+    {
+        // Lógica de la ventana de parry
+        if (isParrying)
+        {
+            parryWindowTimer -= Time.deltaTime;
+            if (parryWindowTimer <= 0f)
+            {
+                isParrying = false;
+            }
+        }
+    }
+
     private void TryToAttack()
     {
         if (!isAttacking)
@@ -38,7 +59,7 @@ public class PlayerCombat : MonoBehaviour
             moveController.StopMovement();
             isAttacking = true;
             canCancelAttack = true;
-            playerAnim.SetTrigger("Attack"); 
+            playerAnim.SetTrigger("Attack");
         }
         else
         {
@@ -80,7 +101,12 @@ public class PlayerCombat : MonoBehaviour
             canCancelAttack = false;
             playerAnim.SetTrigger("GoBlock");
             playerAnim.SetBool("IsBlocking", true);
+            isBlocking = true;
             moveController.StopMovement();
+
+            // Inicia la ventana de parry
+            isParrying = true;
+            parryWindowTimer = parryWindowDuration;
         }
     }
     private void StopBlocking()
@@ -91,6 +117,11 @@ public class PlayerCombat : MonoBehaviour
             moveController.EnableMovement();
         }
         playerAnim.SetBool("IsBlocking", false);
+        isBlocking = false;
+
+        // Resetea el parry al dejar de bloquear
+        isParrying = false;
+        parryWindowTimer = 0f;
     }
 
 }

@@ -7,7 +7,7 @@ public class EnemyAttackCollider : MonoBehaviour
     {
         if (collision.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
-            damageable.TakeDamage(enemyScript.damage);
+            damageable.TakeHit(enemyScript.damage);
         }
     }
 }

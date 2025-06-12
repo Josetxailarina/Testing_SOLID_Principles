@@ -12,4 +12,8 @@ public class PlayerAnimatorEvents : MonoBehaviour
     {
         playerCombat.StopAttack();
     }
+    public void PlayRandomSwing()
+    {
+        SoundsManager.Instance.PlayRandomSwing();
+    }
 }

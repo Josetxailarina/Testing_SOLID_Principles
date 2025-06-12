@@ -74,6 +74,17 @@ BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 4732329982340847810, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
   m_PrefabInstance: {fileID: 6428122777357493730}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4397848863075955662 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7222942188311860780, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
+  m_PrefabInstance: {fileID: 6428122777357493730}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cdc4025e710d9b4aa5f6c7ea07c0355, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5986376297046284949 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 731454636631703415, guid: b6a59fb6c1c42cf4daa974542a5ea9dc, type: 3}
@@ -96,9 +107,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc135b476475eaf459ce319f0b94d6d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  maxHealth: 100
   damage: 10
   hitboxCollider: {fileID: 1772688242398133536}
   spritesParent: {fileID: 5986376297046284949}
+  healthBar: {fileID: 4397848863075955662}
   isDead: 0
   healAmount: 10

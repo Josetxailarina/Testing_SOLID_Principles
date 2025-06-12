@@ -7,7 +7,7 @@ public class AttackColliderPlayer : MonoBehaviour
         IDamageable damageable = collision.GetComponent<IDamageable>();
         if (damageable != null)
         {
-            damageable.TakeDamage(25);
+            damageable.TakeHit(25);
         }
     }
 }

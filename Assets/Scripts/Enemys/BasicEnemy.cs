@@ -3,11 +3,13 @@ using UnityEngine;
 
 public class BasicEnemy : MonoBehaviour
 
-{                  
-    [SerializeField] protected float health = 100f; //protected = accessed by the child class
+{
+    [SerializeField] protected float maxHealth = 100f;
+    protected float currentHealth = 100f; 
     public float damage = 10f;
     [SerializeField] private Collider2D hitboxCollider;
     [SerializeField] private GameObject spritesParent;
+    [SerializeField] protected HealthBar healthBar; 
 
     protected SpriteRenderer[] spriteRenderers;
     [HideInInspector] public bool isDead = false;
@@ -17,11 +19,12 @@ public class BasicEnemy : MonoBehaviour
     public virtual void Start() //virtual = can be overriden by the child class
     {
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        healthBar.UpdateHealthBars(currentHealth, maxHealth);
     }
     public virtual void TakeDamage(float amount)
     {
-        health -= amount;
-        if (health <= 0)
+        currentHealth -= amount;
+        if (currentHealth <= 0)
         {
             isDead = true;
             StopAllCoroutines();
@@ -30,6 +33,7 @@ public class BasicEnemy : MonoBehaviour
         else
         {
             StartCoroutine(FlashRed());
+            healthBar.ReduceHealth(currentHealth, maxHealth);
         }
     }
 

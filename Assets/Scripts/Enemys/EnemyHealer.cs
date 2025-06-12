@@ -8,13 +8,14 @@ public class EnemyHealer : BasicEnemy
     public override void Start()
     {
         base.Start();
-        initialHealth = health;
+        initialHealth = currentHealth;
     }
     private void Update()
     {
-        if (!isDead && health < initialHealth)
+        if (!isDead && currentHealth < initialHealth)
         {
-            health += healAmount * Time.deltaTime;
+            currentHealth += healAmount * Time.deltaTime;
+            healthBar.UpdateRedBar(currentHealth, maxHealth);
         }    
     }
 }
