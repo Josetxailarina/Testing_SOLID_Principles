@@ -1,6 +1,10 @@
-using UnityEngine;
-
 public interface IDamageable 
 {
-    public void TakeHit(float amount);
+    /// <summary>
+    /// Applies hit. Returns true if the hit was parried, false otherwise.
+    /// </summary>
+    /// 
+    public float currentHealth { get; }
+    public float maxHealth { get; }
+    public bool TakeHit(float amount);
 }

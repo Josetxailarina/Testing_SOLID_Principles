@@ -9,7 +9,7 @@ public class ArmoredEnemy : BasicEnemy
     {
         if (armor > 0)
         {
-            StartCoroutine(FlashRed());
+            StartCoroutine(FlashDamageEffect());
             armor -= damage;
             if(armor <= 0)
             {

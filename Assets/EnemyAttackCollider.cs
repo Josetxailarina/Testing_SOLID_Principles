@@ -7,7 +7,12 @@ public class EnemyAttackCollider : MonoBehaviour
     {
         if (collision.TryGetComponent<IDamageable>(out IDamageable damageable))
         {
-            damageable.TakeHit(enemyScript.damage);
+            bool isParrying = damageable.TakeHit(enemyScript.damage);
+
+            if (isParrying)
+            {
+                enemyScript.AddPosture(enemyScript.damage * 2);
+            }
         }
     }
 }
