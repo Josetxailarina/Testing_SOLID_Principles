@@ -13,6 +13,10 @@ public class PlayerCombat : MonoBehaviour
     private bool canCancelAttack = false;
     private bool isBlockingPressed = false;
     private bool attackBufferActive = false;
+    private bool isAttackPressed = false;
+
+    private float attackPressedTimer = 0;
+    private float timeToActivateChargedAttack = 0.5f;
 
     // Parry variables
     [SerializeField] private float parryWindowDuration = 0.3f;
@@ -20,7 +24,8 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnEnable()
     {
-        InputManager.OnAttackPressed += TryToAttack;
+        InputManager.OnAttackPressed += AttackPressed;
+        InputManager.OnAttackCanceled += AttackReleased;
         InputManager.OnDodgePressed += TryToDodge;
         InputManager.OnBlockPressed += TryToBlock;
         InputManager.OnBlockCanceled += StopBlocking;
@@ -28,7 +33,8 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnDisable()
     {
-        InputManager.OnAttackPressed -= TryToAttack;
+        InputManager.OnAttackPressed -= AttackPressed;
+        InputManager.OnAttackCanceled -= AttackReleased;
         InputManager.OnDodgePressed -= TryToDodge;
         InputManager.OnBlockPressed -= TryToBlock;
         InputManager.OnBlockCanceled -= StopBlocking;
@@ -42,6 +48,20 @@ public class PlayerCombat : MonoBehaviour
     private void Update()
     {
         // Lógica de la ventana de parry
+        ManageParryWindow();
+
+        if (isAttackPressed && attackPressedTimer < timeToActivateChargedAttack)
+        {
+            attackPressedTimer += Time.deltaTime;
+            if (attackPressedTimer >= timeToActivateChargedAttack)
+            {
+                TryToAttack(true);
+            }
+        }
+    }
+
+    private void ManageParryWindow()
+    {
         if (isParrying)
         {
             parryWindowTimer -= Time.deltaTime;
@@ -52,14 +72,36 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    private void TryToAttack()
+    private void AttackPressed()
+    {
+        isAttackPressed = true;
+        attackPressedTimer = 0f; 
+    }
+    private void AttackReleased()
+    {
+        isAttackPressed = false;
+        if (attackPressedTimer < timeToActivateChargedAttack)
+        {
+            TryToAttack(false);
+        }
+        attackPressedTimer = 0f;
+    }
+
+    private void TryToAttack(bool isCharged)
     {
         if (!isAttacking)
         {
             moveController.StopMovement();
             isAttacking = true;
             canCancelAttack = true;
-            playerAnim.SetTrigger("Attack");
+            if (isCharged)
+            {
+                playerAnim.SetTrigger("ChargedAttack");
+            }
+            else
+            {
+                playerAnim.SetTrigger("Attack");
+            }
         }
         else
         {
@@ -83,7 +125,7 @@ public class PlayerCombat : MonoBehaviour
         if (attackBufferActive)
         {
             attackBufferActive = false;
-            TryToAttack();
+            TryToAttack(false);
         }
     }
 

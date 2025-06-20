@@ -10,6 +10,7 @@ public class InputManager : MonoBehaviour
     public static event Action OnJumpCanceled;
     public static event Action OnInteractPressed;
     public static event Action OnAttackPressed;
+    public static event Action OnAttackCanceled;
     public static event Action OnDodgePressed;
     public static event Action OnBlockPressed;
     public static event Action OnBlockCanceled;
@@ -21,6 +22,10 @@ public class InputManager : MonoBehaviour
         if (context.performed)
         {
             OnAttackPressed?.Invoke();
+        }
+        else if (context.canceled)
+        {
+            OnAttackCanceled?.Invoke();
         }
     }
     public void HandleMoveInput(InputAction.CallbackContext context)
