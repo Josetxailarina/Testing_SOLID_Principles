@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerAnimatorEvents : MonoBehaviour
 {
     [SerializeField] private PlayerCombat playerCombat;
+    [SerializeField] private MoveController moveController;
 
     public void DisableAttackCancellation()
     {
@@ -15,5 +16,10 @@ public class PlayerAnimatorEvents : MonoBehaviour
     public void PlayRandomSwing()
     {
         SoundsManager.Instance.PlayRandomSwing();
+    }
+
+    public void DashOnAttack()
+    {
+        moveController.DashAttack();
     }
 }

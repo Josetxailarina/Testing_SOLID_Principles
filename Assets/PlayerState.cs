@@ -13,6 +13,7 @@ public class PlayerState : MonoBehaviour, IDamageable
     [SerializeField] private ParticleSystem bloodEffect;
     [SerializeField] private ParticleSystem blockEffect;
     [SerializeField] private ParticleSystem parryEffect;
+
     private PostureHandler postureHandler;
     private PlayerCombat playerCombat;
 
@@ -53,6 +54,10 @@ public class PlayerState : MonoBehaviour, IDamageable
         }
     }
 
+    public void GetStunned()
+    {
+
+    }
     private void ReduceHealth(float damage)
     {
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);

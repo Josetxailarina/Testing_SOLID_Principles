@@ -750,6 +750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCombat: {fileID: 1852976276}
+  moveController: {fileID: 1852976274}
 --- !u!1 &291245681
 GameObject:
   m_ObjectHideFlags: 0
@@ -1181,19 +1182,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 416189039}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: HandleMoveInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 351f2ccd-1f9f-44bf-9bec-d62ac5c5f408
     m_ActionName: 'Player/Move[/DualShock4GamepadHID/leftStick,/XInputControllerWindows/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
@@ -5080,7 +5069,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 048bb2e07b8c5c349a0b362ecc737e43, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -5101,7 +5090,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 2ce137718ab62fc45a1b2a0975e8f8b8, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -5174,6 +5163,11 @@ MonoBehaviour:
   jumpForce: 9
   anim: {fileID: 271462011}
   spriteObject: {fileID: 271462010}
+  airPhysicsMaterial: {fileID: 6200000, guid: 2ce137718ab62fc45a1b2a0975e8f8b8, type: 2}
+  groundPhysicsMaterial: {fileID: 6200000, guid: 048bb2e07b8c5c349a0b362ecc737e43, type: 2}
+  playerInput: {fileID: 416189040}
+  dashAttackDistance: 0.7
+  dashAttackduration: 0.2
 --- !u!114 &1852976275
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,8 +4,6 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    private float moveDirection = 0;
-    public static event Action<float> OnMovePressed;
     public static event Action OnJumpPressed;
     public static event Action OnJumpCanceled;
     public static event Action OnInteractPressed;
@@ -28,22 +26,7 @@ public class InputManager : MonoBehaviour
             OnAttackCanceled?.Invoke();
         }
     }
-    public void HandleMoveInput(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            moveDirection = context.ReadValue<Vector2>().x;
-            if (moveDirection != 0)
-            {
-                OnMovePressed?.Invoke(moveDirection);
-            }
-        }
-        else if (context.canceled)
-        {
-            moveDirection = 0;
-            OnMovePressed?.Invoke(moveDirection);
-        }
-    }
+    
     public void Jump(InputAction.CallbackContext context)
     {
         if (context.performed)

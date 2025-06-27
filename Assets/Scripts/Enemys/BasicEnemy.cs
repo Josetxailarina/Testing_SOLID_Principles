@@ -71,6 +71,11 @@ public class BasicEnemy : MonoBehaviour, IDamageable
         }
     }
 
+    public void GetStunned()
+    {
+
+    }
+
     protected IEnumerator FlashDamageEffect()
     {
         SetTintColor(new Color(1, 1, 1, 1)); // White with alpha 1

@@ -91,6 +91,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (!isAttacking)
         {
+            moveController.UpdateSpriteDirection();
             moveController.StopMovement();
             isAttacking = true;
             canCancelAttack = true;

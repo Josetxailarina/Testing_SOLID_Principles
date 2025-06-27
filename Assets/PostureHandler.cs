@@ -41,13 +41,13 @@ public class PostureHandler : MonoBehaviour
         {
             currentPosture = maxPosture;
             isStunned = true;
-            // Aquí puedes lanzar un evento o llamar a un método para notificar el aturdimiento
+            entityState.GetStunned(); 
         }
         UpdatePostureBar();
 
         // Pausa la recuperación durante 0.5s
         if (recoveryPauseCoroutine != null)
-            StopCoroutine(recoveryPauseCoroutine);
+        StopCoroutine(recoveryPauseCoroutine);
         recoveryPauseCoroutine = StartCoroutine(PauseRecoveryCoroutine());
     }
     private IEnumerator PauseRecoveryCoroutine()
@@ -68,5 +68,4 @@ public class PostureHandler : MonoBehaviour
         if (postureBar != null)
             postureBar.UpdatePostureBar(currentPosture, maxPosture);
     }
-
 }

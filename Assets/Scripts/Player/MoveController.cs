@@ -1,5 +1,7 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MoveController : MonoBehaviour
 {
@@ -22,7 +24,13 @@ public class MoveController : MonoBehaviour
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private Animator anim;
     [SerializeField] private GameObject spriteObject;
-    
+    [SerializeField] private PhysicsMaterial2D airPhysicsMaterial;
+    [SerializeField] private PhysicsMaterial2D groundPhysicsMaterial;
+    [SerializeField] private PlayerInput playerInput;
+
+    [SerializeField] private float dashAttackDistance = 2f;
+    [SerializeField] private float dashAttackduration = 0.2f;
+
 
 
     private void Start()
@@ -32,34 +40,29 @@ public class MoveController : MonoBehaviour
     
     private void OnEnable()
     {
-        InputManager.OnMovePressed += GetDirection;
         InputManager.OnJumpPressed += TryToJump;
         InputManager.OnJumpCanceled += JumpCanceled;
     }
 
     private void OnDisable()
     {
-        InputManager.OnMovePressed -= GetDirection;
         InputManager.OnJumpPressed -= TryToJump;
         InputManager.OnJumpCanceled -= JumpCanceled;
-    }
-
-    private void GetDirection(float direction)
-    {
-        moveDirection = direction;
-        anim.SetFloat("Velocity", Mathf.Abs(moveDirection));
-        UpdateSpriteDirection();
     }
 
     public void StopMovement()
     {
         canMove = false;
+        if (onGround)
+        {
+            rb.angularVelocity = 0;
+        }
     }
     public void EnableMovement()
     {
         canMove = true;
     }
-    private void UpdateSpriteDirection()
+    public void UpdateSpriteDirection()
     {
         if (moveDirection > 0 && !lookingRight)
         {
@@ -97,6 +100,8 @@ public class MoveController : MonoBehaviour
     private void PerformJump()
     {
         jumping = true;
+        rb.sharedMaterial = airPhysicsMaterial;
+
         if (jumpPressed)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
@@ -114,6 +119,7 @@ public class MoveController : MonoBehaviour
         jumping = false;
         anim.SetBool("InAir", false);
         coyoteTimer = coyoteDuration;
+        rb.sharedMaterial = groundPhysicsMaterial;
         if (jumpBufferTimer > 0)
         {
             PerformJump();
@@ -124,6 +130,7 @@ public class MoveController : MonoBehaviour
         onGround = false;
         coyoteTimer = coyoteDuration;
         anim.SetBool("InAir", true);
+        rb.sharedMaterial = airPhysicsMaterial;
     }
 
 
@@ -131,14 +138,24 @@ public class MoveController : MonoBehaviour
 
     private void Update()
     {
+        moveDirection = playerInput.actions["Move"].ReadValue<Vector2>().x;
+        if (canMove)
+        {
+            anim.SetFloat("Velocity", Mathf.Abs(moveDirection));
+            UpdateSpriteDirection(); 
+        }
+
         UpdateJumpBufferTimer();
         UpdateCoyoteTimer();
     }
     private void FixedUpdate()
     {
-        
-        rb.linearVelocity = new Vector2(moveDirection * speed, rb.linearVelocity.y);
 
+        if (canMove)
+        {
+            rb.linearVelocity = new Vector2(moveDirection * speed, rb.linearVelocity.y);
+
+        }
         // Make the player fall faster
         if (rb.linearVelocity.y < 2 && coyoteTimer <= 0)
         {
@@ -162,6 +179,30 @@ public class MoveController : MonoBehaviour
         }
     }
 
-    
+    public void DashAttack()
+    {
+        if (onGround)
+        {
+            StopAllCoroutines();
+            StartCoroutine(DashAttackCoroutine(dashAttackDistance, dashAttackduration)); 
+        }
+    }
+
+    private IEnumerator DashAttackCoroutine(float distance, float duration)
+    {
+        float elapsed = 0f;
+        int direction = lookingRight ? 1 : -1;
+        Vector2 start = rb.position;
+        Vector2 end = start + new Vector2(direction * distance, 0);
+
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+            rb.MovePosition(Vector2.Lerp(start, end, t));
+            elapsed += Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+        rb.MovePosition(end);
+    }
 
 }

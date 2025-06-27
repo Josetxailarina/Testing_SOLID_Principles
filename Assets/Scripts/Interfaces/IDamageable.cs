@@ -7,4 +7,7 @@ public interface IDamageable
     public float currentHealth { get; }
     public float maxHealth { get; }
     public bool TakeHit(float amount);
+
+    public void GetStunned();
+    
 }
