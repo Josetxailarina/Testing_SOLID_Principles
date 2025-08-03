@@ -17,18 +17,22 @@ public class BasicEnemy : MonoBehaviour, IDamageable
 
     protected SpriteRenderer[] spriteRenderers;
     [HideInInspector] public bool isDead = false;
+    private GameObject playerObject;
+    private Rigidbody2D rb;
 
     private void Awake()
     {
         maxHealth = 100f;
         currentHealth = maxHealth;
         postureHandler = GetComponent<PostureHandler>();
+        rb = GetComponent<Rigidbody2D>();
 
     }
 
     public virtual void Start() 
     {
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        playerObject = GameObject.FindGameObjectWithTag("Player");
         healthBar.UpdateHealthBars(currentHealth, maxHealth);
     }
     public void AddPosture(float amount)
@@ -66,6 +70,7 @@ public class BasicEnemy : MonoBehaviour, IDamageable
         }
         else
         {
+            knockUp();
             StartCoroutine(FlashDamageEffect());
             healthBar.ReduceHealth(currentHealth, maxHealth);
         }
@@ -74,6 +79,15 @@ public class BasicEnemy : MonoBehaviour, IDamageable
     public void GetStunned()
     {
 
+    }
+    public void knockUp()
+    {
+        if (playerObject != null)
+        {
+            float directionX = Mathf.Sign(transform.position.x - playerObject.transform.position.x);
+            Vector2 force = new Vector2(directionX, 0f).normalized * 3f;
+            rb.AddForce(force, ForceMode2D.Impulse);
+        }
     }
 
     protected IEnumerator FlashDamageEffect()

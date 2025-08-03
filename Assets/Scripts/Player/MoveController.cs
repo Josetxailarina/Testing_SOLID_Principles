@@ -55,7 +55,7 @@ public class MoveController : MonoBehaviour
         canMove = false;
         if (onGround)
         {
-            rb.angularVelocity = 0;
+            rb.linearVelocity = Vector2.zero;
         }
     }
     public void EnableMovement()
